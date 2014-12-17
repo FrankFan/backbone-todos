@@ -1,0 +1,25 @@
+{
+  "name": "backbone-todos",
+  "version": "0.0.0",
+  "dependencies": {
+    "sass-bootstrap": "~2.3.0",
+    "jquery": "~1.9.0",
+    "underscore": "~1.4.3",
+    "backbone": "~1.0.0",
+    "modernizr": "~2.6.2",
+    "backbone.localStorage": "~1.1.6"
+  },
+  "homepage": "https://github.com/FrankFan/backbone-todos",
+  "authors": [
+    "fanyong <fanyong@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

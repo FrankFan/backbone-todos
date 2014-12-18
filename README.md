@@ -23,8 +23,12 @@ a TODO app build with backbone.js, grunt yeaman and bower
 
 安装完成之后就可以使用如下命令生成 `backbone`开发所需的js文件：
 
-$ yo backbone:view todo
-$ yo backbone:router todo
-$ yo backbone:model todo
-$ yo backbone:collection todo
+`$ yo backbone:view todo`
+
+`$ yo backbone:router todo`
+
+`$ yo backbone:model todo`
+
+`$ yo backbone:collection todo`
+
 

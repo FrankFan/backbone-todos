@@ -12,13 +12,14 @@ console.log('\'Allo \'Allo!');
         Views: {},
         Routers: {},
         init: function(){
-            new this.Views.TodosView({
+           new this.Views.TodosView({
                 collection: new this.Collections.TodosCollection()
             });
         }
     };
 
     $(document).ready(function(){
+        debugger;
         backboneApp.init();
     });
 

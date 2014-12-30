@@ -330,6 +330,8 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
+    console.log('target 0 is :' + target); // undefined
+
     if (grunt.option('allow-remote')) {
       grunt.config.set('connect.options.hostname', '0.0.0.0');
     }
@@ -339,17 +341,19 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      //'wiredep',
       'concurrent:server',
-      'autoprefixer',
+      // 'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
   });
 
   grunt.registerTask('server', function (target) {
+    console.log('target is :' + target);
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run([target ? ('serve:' + target) : 'serve']);
+
   });
 
   grunt.registerTask('test', function (target) {
@@ -369,10 +373,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
-    'useminPrepare',
+    // 'wiredep',
+    // 'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    // 'autoprefixer',
     'concat',
     'cssmin',
     'uglify',

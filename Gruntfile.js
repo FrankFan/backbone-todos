@@ -41,10 +41,10 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
-      jstest: {
-        files: ['test/spec/{,*/}*.js'],
-        tasks: ['test:watch']
-      },
+      // jstest: {
+      //   files: ['test/spec/{,*/}*.js'],
+      //   tasks: ['test:watch']
+      // },
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -61,6 +61,12 @@ module.exports = function (grunt) {
           '.tmp/styles/{,*/}*.css',
           '<%= config.app %>/images/{,*/}*'
         ]
+      },
+      jst: {
+        files: [
+          '<%= config.app %>/scripts/templates/*.ejs'
+        ],
+        tasks: ['jst']
       }
     },
 
@@ -167,6 +173,15 @@ module.exports = function (grunt) {
         src: ['<%= config.app %>/index.html'],
         exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']
       }
+    },
+
+    // 必须使用编译生成template.js文件
+    jst: {
+        compile: {
+            files: {
+                '.tmp/scripts/templates.js': ['<%= config.app %>/scripts/templates/*.ejs']
+            }
+        }
     },
 
     // Renames files for browser caching purposes
@@ -328,6 +343,12 @@ module.exports = function (grunt) {
     }
   });
 
+  // 新加一个创建模板的任务
+  grunt.registerTask('createDefaultTemplate', function () {
+      console.log('执行创建模板任务 :' + arguments); // 
+      grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
+  });
+
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
     console.log('target 0 is :' + target); // undefined
@@ -342,6 +363,8 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       //'wiredep',
+      'createDefaultTemplate',
+      'jst',
       'concurrent:server',
       // 'autoprefixer',
       'connect:livereload',

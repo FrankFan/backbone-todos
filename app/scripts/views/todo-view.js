@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    backboneTodos.Views.TodoView = Backbone.View.extend({
+    backboneApp.Views.TodoView = Backbone.View.extend({
 
         template: JST['app/scripts/templates/todo.ejs'],
 

@@ -52,6 +52,11 @@ module.exports = function (grunt) {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'autoprefixer']
       },
+      // compass 编译scss文件
+      compass: {
+          files: ['/styles/{,*/}*.{scss,sass}'],
+          tasks: ['compass']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -62,6 +67,7 @@ module.exports = function (grunt) {
           '<%= config.app %>/images/{,*/}*'
         ]
       },
+      // jst 模板编译
       jst: {
         files: [
           '<%= config.app %>/scripts/templates/*.ejs'
@@ -182,6 +188,25 @@ module.exports = function (grunt) {
                 '.tmp/scripts/templates.js': ['<%= config.app %>/scripts/templates/*.ejs']
             }
         }
+    },
+
+    // 配置sass编译环境
+    compass: {
+      options: {
+        sassDir: '<%= config.app %>/styles',
+        cssDir: '.tmp/styles',
+        // imagesDir: '<%= config.app %>/images',
+        // javascriptsDir: '<%= config.app %>/scripts',
+        // fontsDir: '<%= config.app %>/styles/fonts',
+        importPath: 'bower_components',
+        relativeAssets: true
+      },
+      dist: {},
+      server: {
+        options: {
+          debugInfo: true
+        }
+      }
     },
 
     // Renames files for browser caching purposes
@@ -345,7 +370,7 @@ module.exports = function (grunt) {
 
   // 新加一个创建模板的任务
   grunt.registerTask('createDefaultTemplate', function () {
-      console.log('执行创建模板任务 :' + arguments); // 
+      console.log('执行创建模板任务 :' + arguments); //
       grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
   });
 
@@ -365,6 +390,7 @@ module.exports = function (grunt) {
       //'wiredep',
       'createDefaultTemplate',
       'jst',
+      'compass:server',
       'concurrent:server',
       // 'autoprefixer',
       'connect:livereload',
@@ -384,6 +410,7 @@ module.exports = function (grunt) {
       grunt.task.run([
         'clean:server',
         'concurrent:test',
+        'compass',
         'autoprefixer'
       ]);
     }
@@ -399,6 +426,7 @@ module.exports = function (grunt) {
     // 'wiredep',
     // 'useminPrepare',
     'concurrent:dist',
+    'compass:dist',
     // 'autoprefixer',
     'concat',
     'cssmin',

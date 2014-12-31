@@ -16,8 +16,8 @@
         initialize: function () {
             this.render();
 
-            this.listenTo(this.model, 'add', this.addTodoItem);
-            this.listenTo(this.model, 'reset', this.addAllTodoItems);
+            this.listenTo(this.collection, 'add', this.addTodoItem);
+            this.listenTo(this.collection, 'reset', this.addAllTodoItems);
 
             this.collection.fetch();
         },

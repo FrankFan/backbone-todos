@@ -19,7 +19,6 @@ console.log('\'Allo \'Allo!');
     };
 
     $(document).ready(function(){
-        debugger;
         backboneApp.init();
     });
 

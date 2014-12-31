@@ -1,4 +1,3 @@
-/*global backboneTodos, Backbone*/
 
 (function () {
     'use strict';

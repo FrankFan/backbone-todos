@@ -1,4 +1,3 @@
-/*global backboneTodos, Backbone, JST*/
 
 (function () {
     'use strict';
@@ -31,7 +30,7 @@
         createTodo: function(event){
             event.preventDefault();
 
-            var title = this.$("#new-todo").val().trim();
+            var title = this.$('#new-todo').val().trim();
 
             if (title) {
                 this.collection.create(new backboneApp.Models.TodoModel({
@@ -39,11 +38,11 @@
                 }));
             };
 
-            $("#new-todo").val('');
+            $('#new-todo').val('');
         },
 
-        addTodoItem: function(){
-            var view = new backboneApp.Views.TodosView({
+        addTodoItem: function(todo){
+            var view = new backboneApp.Views.TodoView({
                 model: todo
             });
             this.$('ul').append(view.render().el);

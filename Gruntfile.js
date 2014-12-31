@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        //tasks: ['jshint'],
         options: {
           livereload: true
         }
@@ -134,18 +134,18 @@ module.exports = function (grunt) {
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
-    jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
-      all: [
-        'Gruntfile.js',
-        '<%= config.app %>/scripts/{,*/}*.js',
-        '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
-      ]
-    },
+    // jshint: {
+    //   options: {
+    //     jshintrc: '.jshintrc',
+    //     reporter: require('jshint-stylish')
+    //   },
+    //   all: [
+    //     'Gruntfile.js',
+    //     '<%= config.app %>/scripts/{,*/}*.js',
+    //     '!<%= config.app %>/scripts/vendor/*',
+    //     'test/spec/{,*/}*.js'
+    //   ]
+    // },
 
     // Mocha testing framework configuration options
     mocha: {
@@ -173,13 +173,13 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the HTML file
-    wiredep: {
-      app: {
-        ignorePath: /^\/|\.\.\//,
-        src: ['<%= config.app %>/index.html'],
-        exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']
-      }
-    },
+    // wiredep: {
+    //   app: {
+    //     ignorePath: /^\/|\.\.\//,
+    //     src: ['<%= config.app %>/index.html'],
+    //     exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']
+    //   }
+    // },
 
     // 必须使用编译生成template.js文件
     jst: {
@@ -370,13 +370,13 @@ module.exports = function (grunt) {
 
   // 新加一个创建模板的任务
   grunt.registerTask('createDefaultTemplate', function () {
-      console.log('执行创建模板任务 :' + arguments); //
+      console.log('执行创建模板任务 :' + arguments.toString()); //
       grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
   });
 
 
   grunt.registerTask('serve', 'start the server and preview your app, --allow-remote for remote access', function (target) {
-    console.log('target 0 is :' + target); // undefined
+    console.log('start do serve task '); // undefined
 
     if (grunt.option('allow-remote')) {
       grunt.config.set('connect.options.hostname', '0.0.0.0');

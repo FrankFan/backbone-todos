@@ -1,5 +1,3 @@
-/*global backboneTodos, Backbone, JST*/
-
 
 (function () {
     'use strict';
@@ -12,7 +10,7 @@
 
         events: {
             'click input[type="checkbox"]': 'toggle',
-            'dbclick span': 'toggleEdit',
+            'dblclick span': 'toggleEdit', // 不要把 dblclick 写成 dbclick
             'submit form': 'toggleEdit'
         },
 
@@ -37,7 +35,7 @@
             if (!title) {
                 this.model.destroy();
                 this.remove();
-                return;
+                return
             };
 
             this.$el.toggleClass('editing');
@@ -49,7 +47,7 @@
             }else{
                 // Done editing
                 this.model.set('title', title);
-                this.mode.save();
+                this.model.save();
 
                 this.render();
             }

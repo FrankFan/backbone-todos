@@ -1,3 +1,11 @@
+/**
+* Todo App 功能清单
+* 1. 添加
+* 2. 编辑
+* 3. 删除一条、删除多条
+* 4. 批量选择
+* 5. 统计
+*/
 
 // DOM is Ready load the app
 $(function(){
@@ -65,23 +73,57 @@ $(function(){
 
         // The DOM events
         events: {
-            'click .toggle': 'toggleDone'
+            'click .toggle': 'toggleDone', // item view 前面的checkbox
+            'dblclick .view': 'edit', // 双击 编辑
+            'click a.destroy': 'clear', // 删除一条todo
+            'keypress .edit': 'updateOnEnter', //
+            'blur .edit': 'close'
+
         },
 
         initialize: function(){
+
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'destroy', this.render);
         },
 
         render: function(){
+
             this.$el.html(this.template(this.model.toJSON()));
             this.$el.toggleClass('done', this.model.get('done'));
             this.input = this.$('.edit');
             return this;
+        },
+
+        toggleDone: function(){
+            this.model.toggle();
+        },
+
+        edit: function(){
+            this.$el.addClass('editing');
+            this.input.focus();
+        },
+
+        close: function(){
+            var value = this.input.val();
+            if(!value){
+                this.clear();
+            }else{
+                this.model.save({
+                    title: value
+                });
+                this.$el.removeClass('editing');
+            }
+        },
+
+        updateOnEnter: function(e){
+            e = e || event;
+            if(e.keyCode == 13) this.close();
+        },
+
+        clear: function(){
+            this.model.destroy();
         }
-
-        // TODO...
-
     });
 
     // The Application
@@ -91,11 +133,13 @@ $(function(){
         statsTemplate: _.template($('#stats-template').html()),
 
         events: {
-            'keypress #new-todo': 'createOnEnter'
+            'keypress #new-todo': 'createOnEnter', //创建一条新的todo
+            'click #clear-completed': 'clearCompleted',
+            'click #toggle-all': 'toggleAllComplete'
         },
 
         initialize: function() {
-            console.log('123');
+            console.log('AppView initialize');
 
             this.input = this.$('#new-todo');
             this.allCheckbox = this.$('#toggle-all')[0];
@@ -137,6 +181,8 @@ $(function(){
         },
 
         createOnEnter: function(e){
+            console.log('createOnEnter');
+
             e = e || event;
             if(e.keyCode != 13) return;
             if(!this.input.val()) return;
@@ -145,6 +191,21 @@ $(function(){
                 title: this.input.val()
             });
             this.input.val('');
+        },
+
+        clearCompleted: function(){
+            debugger;
+            _.invoke(Todos.done(), 'destroy');
+            return false;
+        },
+
+        toggleAllComplete: function(){
+            var done = this.allCheckbox.checked;
+            Todos.each(function(todo){
+                todo.save({
+                    'done': done
+                });
+            });
         }
 
 

@@ -67,11 +67,15 @@ $(function(){
 		},
 
 		initialize: function() {
-
+			this.listenTo(this.model, 'change', this.render);
+			this.listenTo(this.model, 'destroy', this.remove);
 		},
 
 		render: function() {
-
+			this.$el.html(this.template(this.model.toJSON()));
+			this.$el.toggleClass('done', this.model.get('done'));
+			this.input = this.$('.edit');
+			return this;
 		},
 
 		toggleDone: function() {
@@ -116,13 +120,16 @@ $(function(){
 		statsTemplate: _.template($('#stats-template').html()),
 
 		events: {
-
+			'keypress #new-todo': 'createOnEnter',
+			'click #clear-completed': 'clearCompleted',
+			'click #toggle-all': 'toggleAllComplete'
 		},
 
 		initialize: function() {
 
 			this.input = this.$('#new-todo');
-			this.allCheckbox = this.$('#toggle-all')[0];
+			// this.allCheckbox = this.$('#toggle-all')[0];
+			this.allCheckbox = $('#toggle-all');
 
 			this.footer = this.$('footer');
 			this.main = $('#main');
@@ -187,5 +194,5 @@ $(function(){
 
 	// Finnaly, creating the App
 	var App = new AppView;
-	
+
 });

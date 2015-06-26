@@ -132,8 +132,8 @@ $(function(){
 		initialize: function() {
 
 			this.input = this.$('#new-todo');
-			// this.allCheckbox = this.$('#toggle-all')[0];
-			this.allCheckbox = $('#toggle-all');
+			this.allCheckbox = $('#toggle-all')[0];
+			// this.allCheckbox = $('#toggle-all');
 
 			this.footer = this.$('footer');
 			this.main = $('#main');
@@ -174,6 +174,7 @@ $(function(){
 		},
 
 		createOnEnter: function(e) {
+			debugger;
 			if (e.keyCode != 13)
 				return;
 			if (!this.input.val())
@@ -197,6 +198,6 @@ $(function(){
 	});
 
 	// Finnaly, creating the App
-	var App = new AppView;
+	var App = new AppView();
 
 });

@@ -174,7 +174,6 @@ $(function(){
 		},
 
 		createOnEnter: function(e) {
-			debugger;
 			if (e.keyCode != 13)
 				return;
 			if (!this.input.val())

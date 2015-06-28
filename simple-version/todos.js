@@ -196,6 +196,7 @@ $(function(){
 		}
 	});
 
+
 	// Finnaly, creating the App
 	var App = new AppView();
 

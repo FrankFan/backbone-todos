@@ -58,6 +58,7 @@ $(function(){
 	// TODO item view
 
 	var TodoView = Backbone.View.extend({
+
 		tagName: 'li',
 
 		template: _.template($('#item-template').html()),
@@ -71,6 +72,8 @@ $(function(){
 		},
 
 		initialize: function() {
+			console.log('initialize in TodoView');
+			
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'destroy', this.remove);
 		},
@@ -130,6 +133,7 @@ $(function(){
 		},
 
 		initialize: function() {
+			console.log('initialize');
 
 			this.input = this.$('#new-todo');
 			this.allCheckbox = $('#toggle-all')[0];
@@ -146,6 +150,7 @@ $(function(){
 		},
 
 		render: function() {
+			console.log('render');
 			var done = Todos.done().length;
 			var remaining = Todos.remaining().length;
 
@@ -174,6 +179,7 @@ $(function(){
 		},
 
 		createOnEnter: function(e) {
+			console.log('createOnEnter');
 			if (e.keyCode != 13)
 				return;
 			if (!this.input.val())

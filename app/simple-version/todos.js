@@ -73,15 +73,18 @@ $(function(){
 
 		initialize: function() {
 			console.log('initialize in TodoView');
-			
+
 			this.listenTo(this.model, 'change', this.render);
 			this.listenTo(this.model, 'destroy', this.remove);
 		},
 
 		render: function() {
+			console.log('render in TodoView');
+
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$el.toggleClass('done', this.model.get('done'));
 			this.input = this.$('.edit');
+
 			return this;
 		},
 

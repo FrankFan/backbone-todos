@@ -36,7 +36,8 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js',
-                '<%= config.app %>/todos/*.*'
+                '<%= config.app %>/todos/*.*',
+                '<%= config.app %>/simple-version/*.*'
         ],
         //tasks: ['jshint'],
         options: {

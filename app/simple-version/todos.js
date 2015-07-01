@@ -125,7 +125,7 @@ $(function(){
 
 	var AppView = Backbone.View.extend({
 
-		el: $('todoapp'),
+		el: $('#todoapp'),
 
 		statsTemplate: _.template($('#stats-template').html()),
 
@@ -139,8 +139,7 @@ $(function(){
 			console.log('initialize');
 
 			this.input = this.$('#new-todo');
-			this.allCheckbox = $('#toggle-all')[0];
-			// this.allCheckbox = $('#toggle-all');
+			this.allCheckbox = this.$("#toggle-all")[0];
 
 			this.footer = this.$('footer');
 			this.main = $('#main');
@@ -157,7 +156,7 @@ $(function(){
 			var done = Todos.done().length;
 			var remaining = Todos.remaining().length;
 
-			if(Todos.length) {
+			if (Todos.length) {
 				this.main.show();
 				this.footer.show();
 				this.footer.html(this.statsTemplate({
@@ -173,7 +172,9 @@ $(function(){
 		},
 
 		addOne: function(todo) {
-			var view = new TodoView({ model: todo });
+			var view = new TodoView({
+				model: todo
+			});
 			this.$('#todo-list').append(view.render().el);
 		},
 
@@ -188,7 +189,9 @@ $(function(){
 			if (!this.input.val())
 				return;
 
-			Todos.create({title: this.input.val()});
+			Todos.create({
+				title: this.input.val()
+			});
 			this.input.val('');
 		},
 
@@ -200,13 +203,15 @@ $(function(){
 		toggleAllComplete: function() {
 			var done = this.allCheckbox.checked;
 			Todos.each(function(todo) {
-				todo.save({'done': done});
+				todo.save({
+					'done': done
+				});
 			});
 		}
 	});
 
 
 	// Finnaly, creating the App
-	var App = new AppView();
+	var App = new AppView;
 
 });

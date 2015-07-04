@@ -11,7 +11,7 @@ todo.js 所有的业务逻辑代码
     - Todo Model 每条todo对应一个model
     - TodoList model组成的集合
 
-整个应用程序代码写在jquery的$.ready()方法中，最后通过`new AppView`启动。
+整个应用程序代码写在jquery的$.ready()方法中，最后通过`new AppView`启动
 
 
 

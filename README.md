@@ -33,3 +33,13 @@ a TODO app build with backbone.js, grunt yeaman and bower
 `$ yo backbone:collection todo`
 
 
+## 运行程序
+
+该程序使用npm、grunt、bower进行管理，所以clone下源代码后需要运行：
+
+```bash
+$ npm install  # 安装package.json文件中的依赖
+$ bower install # 安装bower.json文件中的依赖
+$ grunt serve # 自动在本地起一个server
+```
+

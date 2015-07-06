@@ -55,6 +55,7 @@ $(function(){
 
 	var Todos = new TodoList;
 
+
 	// TODO item view
 
 	var TodoView = Backbone.View.extend({
@@ -121,6 +122,7 @@ $(function(){
 
 	});
 
+
 	// The application
 
 	var AppView = Backbone.View.extend({
@@ -183,11 +185,14 @@ $(function(){
 		},
 
 		createOnEnter: function(e) {
-			console.log('createOnEnter');
-			if (e.keyCode != 13)
+			
+			if (e.keyCode != 13) {
 				return;
-			if (!this.input.val())
+			}
+
+			if (!this.input.val()) {
 				return;
+			}
 
 			Todos.create({
 				title: this.input.val()
